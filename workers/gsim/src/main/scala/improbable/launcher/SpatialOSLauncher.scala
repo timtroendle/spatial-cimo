@@ -1,16 +1,8 @@
 package improbable.launcher
 
-import improbable.dapi.{Launcher, LaunchConfig}
+import scala.sys.process._
 
-/**
- * Run this to start your Simulation!
- */
-object SpatialOSLauncherWithManualWorkers extends SpatialOSLauncher(ManualWorkerStartup)
-object SpatialOSLauncherWithAutomaticWorkers extends SpatialOSLauncher(AutomaticWorkerStartup)
-
-class SpatialOSLauncher(launchConfig: LaunchConfig, args: String*) extends App {
-  val allOptions = Seq(
-    "--entity_activator=improbable.corelib.entity.CoreLibraryEntityActivator"
-  ) ++ args
-  Launcher.startGame(launchConfig, allOptions: _*)
+object SpatialOSLauncher extends App {
+  "spatial build gsim".!
+  "spatial local start default_launch.pb.json".!
 }
