@@ -1,0 +1,8 @@
+package eeci.building;
+
+component Traits {
+    id = 1000;
+    float heat_mass_capacity = 1;
+    float heat_transmission = 2;
+    float conditioned_floor_area = 3;
+}
