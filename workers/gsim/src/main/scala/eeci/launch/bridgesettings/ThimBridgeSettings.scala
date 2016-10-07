@@ -1,5 +1,6 @@
 package improbable.launch.bridgesettings
 
+import eeci.util.ThermalEngineConstraintSatisfier
 import improbable.fapi.bridge._
 import improbable.fapi.network.MultiplexTcpLinkSettings
 import improbable.serialization.KryoSerializable
@@ -11,7 +12,7 @@ object ThimBridgeSettings extends BridgeSettingsResolver {
     ThimAssetContextDiscriminator,
     MultiplexTcpLinkSettings(4),
     THIM_TYPE,
-    null,
+    ThermalEngineConstraintSatisfier,
     RadialInterestPolicy,
     MetricsEngineLoadPolicy,
     PerEntityOrderedStateUpdateQos
