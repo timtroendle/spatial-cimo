@@ -1,0 +1,53 @@
+{
+  "Tasks": [
+      {
+        "Name": "Codegen",
+        "Steps": [
+          {
+            "Name": "C++",
+            "Arguments": ["process_schema", "--use_worker_defaults", "--output", "generated", "--language", "cpp"]
+          }
+        ]
+      },
+    {
+     "Name": "Build",
+     "Steps": [
+       {
+         "Name": "Codegen",
+         "Arguments": ["exec", "Codegen"]
+       },
+       {
+         "Name": "Prepare build directory",
+         "Command": "bash",
+         "Arguments": ["-c", "mkdir -p build"]
+       },
+       {
+         "Name": "CMake steps",
+         "WorkingPath": "build",
+         "Command": "bash",
+         "Arguments": ["../generate.sh"]
+       },
+       {
+         "Name": "C++",
+         "WorkingPath": "build",
+         "Command": "cmake",
+         "Arguments": ["--build", ".", "--config", "Release"]
+       }
+   ]
+    },
+    {
+      "Name": "Clean",
+      "Steps": [
+        {
+          "Name": "Generated Code",
+          "Arguments": ["process_schema",  "--use_worker_defaults", "clean", "generated", "--language", "cpp"]
+        },
+        {
+          "Name": "Build files",
+          "Command": "bash",
+          "Arguments": ["-c", "rm -rf build"]
+        }
+      ]
+    }
+  ]
+}

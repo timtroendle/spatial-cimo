@@ -4,6 +4,7 @@ import eeci.apps.TestBuildingSpawner
 import improbable.bridgesettings.{UnityClientBridgeSettings, UnityFSimBridgeSettings}
 import improbable.dapi.LaunchConfig
 import improbable.fapi.bridge.CompositeBridgeSettingsResolver
+import improbable.launch.bridgesettings.ThimBridgeSettings
 import improbable.papi.worldapp.WorldApp
 import improbable.unity.fabric.engine.DownloadableUnityConstraintToEngineDescriptorResolver
 
@@ -32,5 +33,6 @@ class SimulationLaunchConfig(appsToStart: Seq[Class[_ <: WorldApp]],
 
 object DefaultBridgeSettingsResolver extends CompositeBridgeSettingsResolver(
   UnityClientBridgeSettings,
-  UnityFSimBridgeSettings
+  UnityFSimBridgeSettings,
+  ThimBridgeSettings
 )
