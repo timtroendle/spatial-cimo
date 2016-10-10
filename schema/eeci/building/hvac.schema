@@ -4,4 +4,5 @@ component Hvac {
     id = 1001;
     float max_heating_power = 1;
     float max_cooling_power = 2;
+    float current_power = 3;
 }
