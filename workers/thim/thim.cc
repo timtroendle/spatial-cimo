@@ -5,8 +5,10 @@
 
 using eeci::building::Temperature;
 
-static const std::string kWorkerType = "Thim";
-static const std::string kLoggerName = "thim.cc";
+static const std::string worker_type = "Thim";
+static const std::string logger_name = "thim.cc";
+
+static const unsigned seconds_per_update = 5;
 
 void UpdateBuildingTemperature(worker::Connection &connection,
                                const worker::EntityId &entity_id,
@@ -31,7 +33,7 @@ int main(int argc, char **argv) {
     const std::string worker_id = argv[3];
 
     worker::ConnectionParameters params;
-    params.WorkerType = kWorkerType;
+    params.WorkerType = worker_type;
     params.WorkerId = worker_id;
     params.Network.UseExternalIp = true;
     params.Network.Tcp.MultiplexLevel = 4;
@@ -39,7 +41,6 @@ int main(int argc, char **argv) {
 
     worker::View view;
 
-    static const unsigned kSecondsPerUpdate = 5;
     auto time = std::chrono::high_resolution_clock::now();
     while (true) {
         auto op_list = connection.GetOpList(0 /* non-blocking */);
@@ -51,7 +52,7 @@ int main(int argc, char **argv) {
         for (auto &pair : entities) {
             UpdateBuildingTemperature(connection, pair.first, pair.second);
         }
-        time += std::chrono::microseconds(kSecondsPerUpdate * 1000000);
+        time += std::chrono::microseconds(seconds_per_update * 1000000);
         std::this_thread::sleep_until(time);
     }
 }
