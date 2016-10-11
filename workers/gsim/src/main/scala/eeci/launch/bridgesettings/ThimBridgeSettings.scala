@@ -39,5 +39,3 @@ object ThimBridgeSettings extends BridgeSettingsResolver {
     bridgeSettings.get(engineType)
   }
 }
-
-

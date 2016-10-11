@@ -23,5 +23,4 @@ class TestBuildingSpawner(appWorld: AppWorld, logger: Logger) extends WorldApp {
       maxHeatingPower = 10000,
       initialTemperature = (Math.random().toFloat * 2 - 1) * 4 + 22
     )))
-
 }
