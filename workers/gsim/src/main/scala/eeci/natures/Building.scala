@@ -4,6 +4,7 @@ import eeci.building.{Hvac, Temperature, Traits}
 import eeci.behaviours.{PropagateHvacBehaviour, PropagateTemperatureBehaviour}
 import improbable.corelib.natures.{BaseNature, NatureApplication, NatureDescription}
 import improbable.corelibrary.transforms.TransformNature
+import improbable.math.Vector3d
 import improbable.papi.entity.EntityPrefab
 import improbable.papi.entity.behaviour.EntityBehaviourDescriptor
 
@@ -16,7 +17,7 @@ object Building extends NatureDescription {
     descriptorOf[PropagateHvacBehaviour]
   )
 
-  def apply(heatMassCapacity: Float, heatTransmission: Float, conditionedFloorArea: Float,
+  def apply(location: Vector3d, heatMassCapacity: Float, heatTransmission: Float, conditionedFloorArea: Float,
             maxCoolingPower: Float, maxHeatingPower: Float,
             initialTemperature: Float): NatureApplication = {
     application(
@@ -29,7 +30,7 @@ object Building extends NatureDescription {
       ),
       natures = Seq(
         BaseNature(entityPrefab = EntityPrefab("Building"), isPhysical = false, isVisual = false),
-        TransformNature()
+        TransformNature(location)
       )
     )
   }
