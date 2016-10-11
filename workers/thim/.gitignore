@@ -1,0 +1,4 @@
+# Thim Ignores
+generated/
+logs/
+worker_sdk

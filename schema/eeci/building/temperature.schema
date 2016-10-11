@@ -1,0 +1,6 @@
+package eeci.building;
+
+component Temperature {
+    id = 1002;
+    float current_temperature = 1;
+}
