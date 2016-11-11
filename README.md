@@ -2,6 +2,10 @@
 
 A SpatialOS City Model.
 
+## Conceptual Model
+
+Can be found in `./doc/conceptual-model.md`.
+
 ## Run Information
 
 1. Follow [the instructions](https://spatialos.improbable.io/docs/reference/latest/workers/cpp/introduction) to download the C++ worker SDK.
