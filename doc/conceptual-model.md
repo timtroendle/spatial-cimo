@@ -19,11 +19,7 @@ The following describes the model to be implemented. It combines a city-scale bu
 * P<sub>water, a</sub>: load for heating water related to activity a
 * r<sub>b</sub>: position vector of building b
 * v<sub>people</sub>: average transit velocity of people
-* &Gamma;<sub>p, b, a</sub>: restriction of activity a at place b for person p (0 = activity not possible, 1 = activity possible)
-
-where
-
-&sum;<sub>b</sub><sup>B</sup> &Gamma;<sub>p, b, a</sub> >= 1 &forall; p &isin; P, a &isin; A
+* &Gamma;<sub>p, b, a, k</sub>: restriction of activity a at place b for person p at time k (0 = activity not possible, 1 = activity possible)
 
 (possible more restrictions apply to &Gamma;<sub>p, b, a</sub>: only one work place, sleep only at home, etc.)
 
@@ -38,11 +34,15 @@ r'<sub>p, k</sub> = v<sub>people</sub> * (r<sub>b<sub>destination</sub></sub> - 
 
 r<sub>p, k</sub> = r<sub>b</sub> &forall; p &isin; P<sub>b, k</sub>
 
+See `conceptual-activity-model.md` for more details.
+
 ## People Activity Model
 
 * A<sub>current</sub>: P x K x A &#8614; {0, 1}
 
 where &sum;<sub>a</sub><sup>A</sup> A<sub>current</sub>(p, k, a) = 1 &forall; p &isin; P, k &isin; K
+
+See `conceptual-activity-model.md` for more details.
 
 ## Building Energy Model
 
