@@ -11,6 +11,7 @@ The following describes the model to be implemented. It combines a city-scale bu
 
 ## Parameters
 
+* T<sub>out, k</sub>: outdoor temperature at time k
 * &delta;<sub>thermal</sub>: vector of thermal building parameters
 * &theta;<sub>set, a, H</sub>: heating set point relating to activity a
 * &theta;<sub>set, a, C</sub>: cooling set point relating to activity a
@@ -56,7 +57,7 @@ P<sub>elec, b, k</sub> = P<sub>elec, b, k, fix</sub> + &sum;<sub>a</sub><sup>A</
 
 P<sub>water, b, k</sub> = &sum;<sub>a</sub><sup>A</sup>&sum;<sub>p</sub><sup>P<sub>b, k</sub></sup> A<sub>current</sub>(p, k, a) * P<sub>water, a</sub> &forall; b &isin; B, k &isin; K
 
-P<sub>thermal, b, k</sub> = P<sub>thermal, b, k</sub>(P<sub>thermal, b, k-1</sub>, &delta;<sub>thermal</sub>, &theta;<sub>set, b, k, H</sub>, &theta;<sub>set, b, k, C</sub>) &forall; b &isin; B, k &isin; K
+P<sub>thermal, b, k</sub> = P<sub>thermal, b, k</sub>(P<sub>thermal, b, k-1</sub>, &delta;<sub>thermal</sub>, T<sub>out, k</sub>, &theta;<sub>set, b, k, H</sub>, &theta;<sub>set, b, k, C</sub>) &forall; b &isin; B, k &isin; K
 
 &theta;<sub>set, b, k, H</sub> = max<sub>P<sub>b, k</sub></sub> &sum;<sub>a</sub><sup>A</sup> A<sub>current</sub>(p, k, a) * &theta;<sub>set, a, H</sub> &forall; b &isin; B, k &isin; K
 
