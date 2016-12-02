@@ -13,11 +13,6 @@ The following describes the model to be implemented. It combines a city-scale bu
 
 * T<sub>out, k</sub>: outdoor temperature at time k
 * &delta;<sub>thermal</sub>: vector of thermal building parameters
-* &theta;<sub>set, a, H</sub>: heating set point relating to activity a
-* &theta;<sub>set, a, C</sub>: cooling set point relating to activity a
-* P<sub>elec, b, k, fix</sub>: base active power load for building b at time k
-* P<sub>elec, a</sub>: active power load related to activity a
-* P<sub>water, a</sub>: load for heating water related to activity a
 * r<sub>b</sub>: position vector of building b
 * v<sub>people</sub>: average transit velocity of people
 * &Gamma;<sub>p, b, a, k</sub>: restriction of activity a at place b for person p at time k (0 = activity not possible, 1 = activity possible)
@@ -39,26 +34,21 @@ See `conceptual-activity-model.md` for more details.
 
 ## People Activity Model
 
-* A<sub>current</sub>: P x K x A &#8614; {0, 1}
-
-where &sum;<sub>a</sub><sup>A</sup> A<sub>current</sub>(p, k, a) = 1 &forall; p &isin; P, k &isin; K
+* A<sub>current</sub>: P x K x A &#8614; A
 
 See `conceptual-activity-model.md` for more details.
 
 ## Building Energy Model
 
+* T<sub>in, b, k</sub>: indoor temperature in building b at time k
 * P<sub>thermal, b, k</sub>: heating or cooling power in building b at time k
-* P<sub>elec, b, k</sub>: electrical power in building b at time k
-* P<sub>water, b, k</sub>: power usage for hot water in building b at time k
 
 where
 
-P<sub>elec, b, k</sub> = P<sub>elec, b, k, fix</sub> + &sum;<sub>a</sub><sup>A</sup>&sum;<sub>p</sub><sup>P<sub>b, k</sub></sup> A<sub>current</sub>(p, k, a) * P<sub>elec, a</sub> &forall; b &isin; B, k &isin; K
+P<sub>thermal, b, k</sub> = P<sub>thermal, b, k</sub>(T<sub>in, b, k</sub>, &delta;<sub>thermal</sub>, T<sub>out, k</sub>, &theta;<sub>set, b, k, H</sub>, &theta;<sub>set, b, k, C</sub>) &forall; b &isin; B, k &isin; K
 
-P<sub>water, b, k</sub> = &sum;<sub>a</sub><sup>A</sup>&sum;<sub>p</sub><sup>P<sub>b, k</sub></sup> A<sub>current</sub>(p, k, a) * P<sub>water, a</sub> &forall; b &isin; B, k &isin; K
+T<sub>in, b, k</sub> = T<sub>in, b, k</sub>(T<sub>in, b, k-1</sub>, &delta;<sub>thermal</sub>, T<sub>out, k-1</sub>, P<sub>thermal, b, k-1</sub>)
 
-P<sub>thermal, b, k</sub> = P<sub>thermal, b, k</sub>(P<sub>thermal, b, k-1</sub>, &delta;<sub>thermal</sub>, T<sub>out, k</sub>, &theta;<sub>set, b, k, H</sub>, &theta;<sub>set, b, k, C</sub>) &forall; b &isin; B, k &isin; K
+&theta;<sub>set, b, k, H</sub> = &theta;<sub>set, b, k, H</sub>(P<sub>b, k</sub>)
 
-&theta;<sub>set, b, k, H</sub> = max<sub>P<sub>b, k</sub></sub> &sum;<sub>a</sub><sup>A</sup> A<sub>current</sub>(p, k, a) * &theta;<sub>set, a, H</sub> &forall; b &isin; B, k &isin; K
-
-&theta;<sub>set, b, k, C</sub> = min<sub>P<sub>b, k</sub></sub> &sum;<sub>a</sub><sup>A</sup> A<sub>current</sub>(p, k, a) * &theta;<sub>set, a, C</sub> &forall; b &isin; B, k &isin; K
+&theta;<sub>set, b, k, C</sub> = &theta;<sub>set, b, k, C</sub>(P<sub>b, k</sub>)
