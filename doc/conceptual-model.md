@@ -14,7 +14,7 @@ The following describes the model to be implemented. It combines a city-scale bu
 * T<sub>out, k</sub>: outdoor temperature at time k
 * &delta;<sub>thermal</sub>: vector of thermal building parameters
 * r<sub>b</sub>: position vector of building b
-* v<sub>people</sub>: average transit velocity of people
+* v<sub>people</sub>: average transit speed of people
 * &Gamma;<sub>p, b, a, k</sub>: restriction of activity a at place b for person p at time k (0 = activity not possible, 1 = activity possible)
 
 (possible more restrictions apply to &Gamma;<sub>p, b, a</sub>: only one work place, sleep only at home, etc.)
